@@ -25,43 +25,55 @@
 
 // create an async function for the app
 
-const fetchWeather = async(countryName) => {
-    try {
-        const countryData = await fetch (`https://restcountries.com/v3.1/name/${countryName}`)
-        if(!countryData.ok) {
-            throw new Error(`Failed to fetch`)
-        } 
-    const countryResponse = await countryData.json();
-        //  console.log(countryResponse)
-
-        const country = countryResponse[0].name.common
-         const capitalCity = countryResponse[0].capital[0];
-         const latitude = countryResponse[0].latlng[0];
-         const longitude = countryResponse[0].latlng[1]
-        //  console.log(`Country: ${country}`)
-        //  console.log(`Capital city : ${capitalCity}`)
-        //  console.log(`Latitude : ${latitude}`);
-        //  console.log(`Longitude:${longitude}`)
-
-          dataWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
-         if(!dataWeather.ok) {
-            throw new Error(`Caught an error`)
-         }
-         
-         const responseWeather = await dataWeather.json();
-         
-         const temperature = responseWeather.current_weather.temperature;
-         console.log(`${country}`)
-         console.log(`${capitalCity}`)
-         console.log(`${temperature}`)
-    
-    
-    
-
-    }catch(error) {
-        console.log(error.message)
+const fetchWeather = async (countryName) => {
+  try {
+    const countryData = await fetch(
+      `https://restcountries.com/v3.1/name/${countryName}`
+    );
+    if (!countryData.ok) {
+      throw new Error(`Failed to fetch`);
     }
-    
-}
-const countryName = "Canada"
-fetchWeather(countryName)
+    const countryResponse = await countryData.json();
+    //  console.log(countryResponse)
+
+    const country = countryResponse[0].name.common;
+    const capitalCity = countryResponse[0].capital[0];
+    const latitude = countryResponse[0].latlng[0];
+    const longitude = countryResponse[0].latlng[1];
+    //  console.log(`Country: ${country}`)
+    //  console.log(`Capital city : ${capitalCity}`)
+    //  console.log(`Latitude : ${latitude}`);
+    //  console.log(`Longitude:${longitude}`)
+
+    dataWeather = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+    );
+    if (!dataWeather.ok) {
+      throw new Error(`Caught an error`);
+    }
+
+    const responseWeather = await dataWeather.json();
+
+    const temperature = responseWeather.current_weather.temperature;
+    console.log(`${country}`);
+    console.log(`${capitalCity}`);
+    console.log(`${temperature}`);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const countryName = "Canada";
+fetchWeather(countryName);
+
+// const capitals = function (word) {
+// 	function capitalIndices(word) {
+//   const indices = [];
+//   for (let i = 0; i < word.length; i++) {
+//     if (word[i] === word[i].toUpperCase()) {
+//       indices.push(i);
+//     }
+//   }
+//   return indices;
+// }
+
+// console.log(capitalIndices("CodEWaRs"));
