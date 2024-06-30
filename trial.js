@@ -54,7 +54,9 @@ const fetchWeather = async (countryName) => {
 
     const responseWeather = await dataWeather.json();
 
-    const temperature = responseWeather.current_weather.temperature;
+    const WeatherTemperature = responseWeather.current_weather.temperature;
+    const weatherUnits = responseWeather.current_weather_units.temperature;
+    const temperature = `${WeatherTemperature} ${weatherUnits}`
     console.log(`${country}`);
     console.log(`${capitalCity}`);
     console.log(`${temperature}`);
